@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="index">
+<div th:fragment="content">
+    <h2>搜索结果：</h2>
+    <div class="container">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>图书封面</th>
+                <th>图书名称</th>
+                <th>图书作者</th>
+                <th>图书编号</th>
+                <th>图书价格</th>
+                <th>分类</th>
+                <th>出版时间</th>
+                <th>id</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="result:${results}">
+                <td>  <img style="width: 100px;" th:src="@{{path}(path=${result.getImgurl()})}" alt=""></td>
+                <td th:text="${result.name}"></td>
+                <td th:text="${result.author}"></td>
+                <td th:text="${result.isbn}"></td>
+                <td th:text="${result.price}"></td>
+                <td th:text="${result.type}"></td>
+                <td th:text="${result.publishDate}"></td>
+                <td th:text="${result.id}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>简易图书系统</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <style>
+        .info {
+            position: absolute;
+            top: 8px;
+            right: 350px;
+            color: white;
+        }
+        .person {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: url("/images/parallel.png") no-repeat center;
+            background-size: cover;
+        }
+        .usernav {
+            margin-left: 7%;
+        }
+        .narbar{
+            position: relative;
+        }
+        .nav-item {
+            font-size: 14px;
+            margin-left: 30px;
+        }
+        .popover {
+            max-width: 500px;
+        }
+    </style>
+</head>
+<body style="background:#fafafa;">
+<nav class="navbar navbar-expand-lg fixed-top navbar-light shadow-sm mb-5 bg-white rounded" style="background: white">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">简易图书系统</a>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="usernav navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="/booklist">图书库<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/borrowlist">个人借阅</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/hotbooks">热门图书</a>
+            </li>
+            <li class="nav-item">
+                <div class="dropdown">
+                    <a class="nav-link" id="dropdownMenuLink" data-toggle="dropdown" href="#">分类</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="/type?catalog=小说">小说</a>
+                        <a class="dropdown-item" href="/type?catalog=哲学">哲学</a>
+                        <a class="dropdown-item" href="/type?catalog=散文">散文</a>
+                        <a class="dropdown-item" href="/type?catalog=教育">教育</a>
+                        <a class="dropdown-item" href="/type?catalog=历史">历史</a>
+                        <a class="dropdown-item" href="/type?catalog=互联网">互联网</a>
+                        <a class="dropdown-item" href="/type?catalog=外国文学">外国文学</a>
+                        <a class="dropdown-item" href="/type?catalog=经典名著">经典名著</a>
+                        <a class="dropdown-item" href="/type?catalog=儿童文学">儿童文学</a>
+                        <a class="dropdown-item" href="/type?catalog=心灵鸡汤">心灵鸡汤</a>
+                        <a class="dropdown-item" href="/type?catalog=成功励志">成功励志</a>
+                        <a class="dropdown-item" href="/type?catalog=人物传记">人物传记</a>
+                        <a class="dropdown-item" href="/type?catalog=心理学">心理学</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login.html">退出</a>
+            </li>
+            <li class="nav-item">
+                <!-- Button trigger modal -->
+                <div class="info" data-toggle="tooltip" title="个人信息">
+                    <a href="/userinfo?role=usercenter">
+                        <button type="button" href="" class="btn person">
+                        </button>
+                    </a>
+                </div>
+
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" action="/search">
+            <input type="text" hidden name="role" value="usercenter">
+            <input class="form-control mr-sm-2" id="word"  type="search" placeholder="Search" aria-label="Search" name="title">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <div id="content">
+            </div>
+        </form>
+
+    </div>
+</nav>
+<main>
+    <div th:include="::content">页面正文内容</div>
+</main>
+<nav class="fixed-bottom navbar-light shadow p-3 bg-white rounded" style="text-align: center">
+    <span style="color:lightgray ;font-size: 14px;">
+    简易图书系统Copyright©2020
+    </span>
+</nav>
+<canvas id="myChart" width="100px" height="100px"></canvas>
+</body>
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    });
+    // 借书
+    function borrowbook(bookid) {
+        var r = confirm("确定借阅这本书？");
+        if (!r) {
+            return;
+        }
+        fetch("/borrow?bookid=" + bookid).then(res => res.json())
+            .then(res => {
+                if (res) {
+                    alert("借阅成功");
+                    //window.location.href="/booklist"
+                }
+            })
+    }
+    //还书
+    function returnbook(bookid) {
+        var r = confirm("确定归还这本书？");
+        if (!r) {
+            return;
+        }
+        fetch("/return?bookid=" + bookid).then(res => res.json())
+            .then(res => {
+                if (res) {
+                    alert("归还成功");
+                    window.location.href = "/borrowlist"
+                }
+            })
+    }
+//关键词搜索
+fetch("/getcount").then(res=>res.json()).then(res=>{
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ["图书总量", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            datasets: [{
+                label: '# of Votes',
+                data: [res, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+    console.log(res);
+    console.log("test");
+});
+
+</script>
+</html>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.AdminDao">
+       <resultMap type="com.entity.Admin" id="adminResult">
+              <result property="aid" column="aid"/>
+              <result property="apwd" column="apwd"/>
+              <result property="aname" column="aname"/>
+       </resultMap>
+       
+       <select id="login" resultMap="adminResult" parameterType="map">
+          select * from administrator where aid=#{0} and apwd=#{1}
+       </select>
+       <select id="findAdminById" resultMap="adminResult" parameterType="int">
+          select * from administrator where aid=#{0}
+       </select>   
+       <update id="updateAdminPwd" parameterType="com.entity.Admin" >
+       		update administrator set apwd=#{apwd} where aid=#{aid}
+       </update>
+</mapper>

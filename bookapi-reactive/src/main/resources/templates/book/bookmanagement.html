@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="management">
+<div th:fragment="content">
+    <div class="card-columns" style="margin: 100px 50px 50px 50px">
+        <div class="card mb-3" style="max-width: 540px;" th:each="book:${booklist}">
+            <div class="row no-gutters" >
+                <div class="col-md-4">
+                    <img th:src="@{${book.img}}" class="card-img" alt="...">
+                </div>
+                <div class="col-md-8" data-toggle="popover" data-placement="right" title="介绍" th:data-content="${book.sub2}">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="|《${book.title}》|"></h5>
+                        <p class="card-text" th:text="${book.sub1}"></p>
+                        <p class="card-text">
+                            <small class="text-muted" th:text="${book.catalog}"></small>
+                        </p>
+                        <p class="card-text">
+                            <small class="text-muted" th:text="${book.reading}"></small>
+                        </p>
+                        <p class="card-text">
+                            <small class="text-muted" th:text="${book.tags}"></small>
+                        </p>
+                        <p class="card-text">
+                            <small class="text-muted" th:text="${book.bytime}"></small>
+                        </p>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-outline-success " th:onclick="|javascript:deletebook(${book.id})|" style="width:100%;border:none;border-top:1px solid lightgray;color: black;margin-bottom: 5px">删除</button>
+                <button type="button" class="btn btn-outline-success " data-toggle="modal" th:data-target="|#exampleModalCenter${book.id}|" style="width:100%;border:none;border-top:1px solid lightgray;color: black">修改</button>
+
+                <!-- Button trigger modal -->
+                <!-- Modal -->
+                <div class="modal fade" th:id="|exampleModalCenter${book.id}|" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">编辑</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/modifybook"  method="post">
+                                    <input type="text" name="id" hidden th:value="${book.id}">
+                                    <input type="text" name="reading" hidden th:value="${book.reading}">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">书名</span>
+                                        </div>
+                                        <input type="text" class="form-control" th:value="${book.title}" name="title" aria-describedby="basic-addon1">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon2">分类</span>
+                                        </div>
+                                        <input type="text" class="form-control" th:value="${book.catalog}" name="catalog" aria-describedby="basic-addon2">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon3">标签</span>
+                                        </div>
+                                        <input type="text" class="form-control" th:value="${book.tags}" name="tags" aria-describedby="basic-addon3">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon7">封面</span>
+                                        </div>
+                                        <input type="text" class="form-control" th:value="${book.img}"  name="img" aria-describedby="basic-addon7">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon5">简述</span>
+                                        </div>
+                                        <input type="text" class="form-control" th:value="${book.sub1}"  name="sub1" aria-describedby="basic-addon5">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon4">出版时间</span>
+                                        </div>
+                                        <input type="text" class="form-control" th:value="${book.bytime}"  name="bytime"  aria-describedby="basic-addon4">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon6">图书介绍</span>
+                                        </div>
+                                        <textarea  type="text" rows="5" class="form-control" th:text="${book.sub2}" th:value="${book.sub2}"  name="sub2" aria-describedby="basic-addon6"></textarea>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="reset" class="btn btn-secondary" data-dismiss="modal">重置</button>
+                                        <button type="submit" class="btn btn-primary">提交</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <nav aria-label="Page navigation example" style="margin-bottom: 70px" th:if="${page!=null}" >
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" th:href="@{|?page=${page-1}|}">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+            <li class="page-item"><a class="page-link" href="?page=2">2</a></li>
+            <li class="page-item"><a class="page-link" href="?page=3">3</a></li>
+            <li class="page-item"><a class="page-link" href="?page=4">4</a></li>
+            <li class="page-item"><a class="page-link" href="?page=5">5</a></li>
+            <li class="page-item"><a class="page-link" href="?page=6">6</a></li>
+            <li class="page-item"><a class="page-link" href="?page=7">7</a></li>
+            <li class="page-item"><a class="page-link" href="?page=8">8</a></li>
+            <li class="page-item"><a class="page-link" href="?page=9">9</a></li>
+            <li class="page-item">
+                <a  class="page-link" th:href="@{|?page=${page+1}|}">Next</a>
+            </li>
+        </ul>
+    </nav>
+<!--    <nav aria-label="Page navigation example" style="margin-bottom: 70px" th:if="${title!=null}" >
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" th:href="@{|?title=${title}&page=${page-1}|}">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" th:href="@{|?title=${title}&page=1|}">1</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{|?title=${title}&page=2|}">2</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{|?title=${title}&page=3|}">3</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{|?title=${title}&page=4|}">4</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{|?title=${title}&page=5|}">5</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{|?title=${title}&page=6|}">6</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{|?title=${title}&page=7|}">7</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{|?title=${title}&page=8|}">8</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{|?title=${title}&page=9|}">9</a></li>
+            <li class="page-item">
+                <a  class="page-link" th:href="@{|?title=${title}&page=${page+1}|}">Next</a>
+            </li>
+        </ul>
+    </nav>-->
+
+</div>
+<script>
+    function searchByTitle(page) {
+        fetch("search")
+
+    }
+</script>
+</html>

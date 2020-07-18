@@ -1,0 +1,157 @@
+*{
+    margin: 0;
+    padding: 0;  
+}
+html,body{
+    width: 100%;
+    height: 100%;
+
+}
+.box-bg{ 
+    position: relative;
+    height: 100%;
+/* background:linear-gradient(180deg,rgb(55, 40, 58),rgb(22, 2, 19)); */
+background-color: rgb(55, 40, 58);
+
+} 
+.left-nav{
+    background-color: rgb(56, 39, 77);
+    width: 400px;
+    height: 100%;
+    float: left;
+
+}
+.clearFix::after{
+   display: block;
+   content: "";
+   clear: both;
+}
+.head{
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border-bottom: 2px solid gainsboro;
+}
+.left-nav .head-icon{
+    width: 48px;
+    height: 48px;
+    margin-left: 50px;
+    margin-right: 50px;
+    background:url(../images/财务.png) no-repeat center;
+    background-size: contain;
+    float: left;
+
+}
+.left-nav .head-word{
+    font-size: 30px;
+    color: aliceblue;
+    /* float: right; */
+}
+.main{
+    position: absolute;
+    top: 200px;
+    left: 670px;
+    /* margin:170px 240px; */
+    width: 960px;
+    height: 540px;
+    padding:30px 20px ;
+    background-color: rgba(104, 69, 112, 0.918);
+    border-radius: 10px;
+    /* float: right; */
+}
+.box-bg::after{
+    content: "";
+    display: block;
+    clear: both;
+}
+.left-nav ul li{
+    position: relative;
+    list-style: none;
+    padding-top:20px; 
+    padding-bottom: 20px;
+    padding-left: 140px;
+    color:aliceblue;
+    font-size: 25px;
+ 
+}
+.left-nav ul li.current-li{
+    background-color: rgb(124, 173, 214);
+}
+.ul-icon{
+    position: absolute;
+    top: 17px;
+    left: 45px;
+    width: 40px;
+    height: 40px;
+    background: url(../images/账单.png) no-repeat center;
+    background-size: contain;
+}
+.balance{
+background: url(../images/余额.png) no-repeat center;
+background-size: contain;
+}
+.pay{
+background: url(../images/支付.png) no-repeat center;
+background-size: contain;
+}
+.bill{
+background: url(../images/账单.png) no-repeat center;
+background-size: contain;
+}
+.choice-bill{
+background: url(../images/财务.png) no-repeat center;
+background-size: contain;
+}
+/* mian美化 */
+.main ul{
+    width: 100%;
+    height: 100%;
+  
+}
+.main ul li{
+    display: none;
+    list-style: none;   
+    width: 960px;
+    height: 540px;
+    /* background-color: antiquewhite; */
+    
+}
+.main .show{
+    display: block;
+}
+.main .title{
+    position: absolute;
+    top: -25px;
+    left: 50px;
+    width: 150px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: rgb(45, 142, 223);
+    text-align: center;
+    font-size: 30px;
+    line-height: 48px;
+    color: aliceblue;
+}
+.form-finance div{
+    margin: 0 auto;
+    text-align: center;
+}
+.form-finance input,.form-finance select ,.form-finance button{
+       border-style: none;
+       border-radius: 10px;
+       /* background-color: transparent; */
+       width: 500px;
+       height: 50px;
+       margin: 25px 30px;
+       box-sizing: border-box;
+       font-size: 15px;
+       color: rgb(58, 60, 61);
+       padding-left: 20px;
+       background-color: transparent;
+       border: 2px solid rgb(45, 142, 223);
+}
+.form-finance button{
+    background-color:crimson;
+   padding-left: 0px;
+   border: none;
+   color: aliceblue;
+}

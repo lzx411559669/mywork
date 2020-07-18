@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.ClassDao">
+       <resultMap type="com.entity.Banji" id="classResult">
+              <result property="cid" column="cid"/>
+              <result property="num" column="num"/>
+       </resultMap>
+       
+          <select id="showAllClass" resultMap="classResult" parameterType="map">
+              <![CDATA[
+                       select a.* from  (select c.*,rownum r from class c) a
+                       where r> (#{index}-1)*#{size} and r< #{index}*#{size}
+              ]]>
+          </select>
+          <select id="count" resultType="java.lang.Integer">
+              SELECT COUNT(1) FROM class
+          </select>
+          <select id="delClass" parameterType="int">
+          	   delete from class where cid=#{0}
+          </select>
+          <insert id="addClass" parameterType="com.entity.Banji"> 
+          	   insert into class values(seq_class.nextval,#{num})
+          </insert>
+          <select id="findClass" resultMap="classResult" parameterType="int">
+          <![CDATA[
+          		select * from class where cid=#{0}
+          ]]>
+          </select>
+          <select id="findByCid" resultMap="classResult" parameterType="int">  
+          		select * from class where cid=#{value}
+          </select>
+          <update id="updateClass" parameterType="com.entity.Banji">
+          		update class set num=#{num} where cid=#{cid}
+          </update>
+          <select id="findCl" resultMap="classResult">
+       		select * from class
+       </select>
+</mapper>

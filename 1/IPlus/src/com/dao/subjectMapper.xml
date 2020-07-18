@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.SubjectDao">
+       <resultMap type="com.entity.Subject" id="subjectResult">
+              <result property="suid" column="suid"/>
+              <result property="suname" column="suname"/>
+       </resultMap>
+       
+          <select id="showAllSub" resultMap="subjectResult" parameterType="map">
+              <![CDATA[
+                       select a.* from  (select su.*,rownum r from subject su) a
+                       where r> (#{index}-1)*#{size} and r< #{index}*#{size}
+              ]]>
+          </select>
+          <select id="count" resultType="java.lang.Integer">
+              SELECT COUNT(1) FROM subject
+          </select>
+          <select id="delSubject" parameterType="int">
+          	  delete from subject where suid=#{0}
+          </select>
+          <insert id="addSubject" parameterType="com.entity.Subject">
+          	  insert into subject values(seq_subject.nextval,#{suname})
+          </insert>
+          <select id="findSubject" resultMap="subjectResult" parameterType="String">
+              <![CDATA[
+                       select * from subject where suname like '%'||#{0}||'%' 
+              ]]>
+          </select>
+          <select id="findBySuid" resultMap="subjectResult" parameterType="int">
+          		select * from subject where suid=#{0}
+          </select>
+          <update id="updateSubject" parameterType="com.entity.Subject"> 
+          		update subject set suname=#{suname} where suid=#{suid}
+          </update>
+          <select id="findsj" resultMap="subjectResult">
+          		select * from subject
+          </select>
+</mapper>

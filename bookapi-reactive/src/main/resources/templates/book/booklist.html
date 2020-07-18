@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="usercenter">
+<div th:fragment="content">
+    <div class="card-columns" style="margin: 100px 50px 50px 50px">
+        <div class="card mb-3" style="max-width: 540px;" th:each="book:${booklist}">
+            <div class="row no-gutters" data-toggle="popover" data-placement="right" title="介绍" th:data-content="${book.sub2}">
+                <div class="col-md-4">
+                    <img th:src="@{${book.img}}" class="card-img" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="|《${book.title}》|"></h5>
+                        <p class="card-text" th:text="${book.sub1}"></p>
+                        <p class="card-text">
+                            <small class="text-muted" th:text="${book.catalog}"></small>
+                        </p>
+                        <p class="card-text">
+                            <small class="text-muted" th:text="${book.reading}"></small>
+                        </p>
+                        <p class="card-text">
+                            <small class="text-muted" th:text="${book.tags}"></small>
+                        </p>
+                        <p class="card-text">
+                            <small class="text-muted" th:text="${book.bytime}"></small>
+                        </p>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-outline-success bg-success" th:onclick="|javascript:borrowbook(${book.id})|" th:if="${user==null}" style="width:100%;color: white">借阅</button>
+                <button type="button" class="btn btn-outline-success bg-success" th:onclick="|javascript:returnbook(${book.id})|" th:if="${user!=null}" style="width:100%;color: white">还书</button>
+            </div>
+        </div>
+    </div>
+    <nav aria-label="Page navigation example" style="margin-bottom: 70px" th:if="${page!=null&&catalog==null}" >
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" th:href="@{|?page=${page-1}|}">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+            <li class="page-item"><a class="page-link" href="?page=2">2</a></li>
+            <li class="page-item"><a class="page-link" href="?page=3">3</a></li>
+            <li class="page-item"><a class="page-link" href="?page=4">4</a></li>
+            <li class="page-item"><a class="page-link" href="?page=5">5</a></li>
+            <li class="page-item"><a class="page-link" href="?page=6">6</a></li>
+            <li class="page-item"><a class="page-link" href="?page=7">7</a></li>
+            <li class="page-item"><a class="page-link" href="?page=8">8</a></li>
+            <li class="page-item"><a class="page-link" href="?page=9">9</a></li>
+            <li class="page-item">
+                <a  class="page-link" th:href="@{|?page=${page+1}|}">Next</a>
+            </li>
+        </ul>
+    </nav>
+  <nav aria-label="Page navigation example" style="margin-bottom: 70px" th:if="${catalog!=null}" >
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" th:href="@{|?catalog=${catalog}&page=${page-1}|}">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" th:href="@{|?catalog=${catalog}&page=1|}">1</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{|?catalog=${catalog}&page=2|}">2</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{|?catalog=${catalog}&page=3|}">3</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{|?catalog=${catalog}&page=4|}">4</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{|?catalog=${catalog}&page=5|}">5</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{|?catalog=${catalog}&page=6|}">6</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{|?catalog=${catalog}&page=7|}">7</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{|?catalog=${catalog}&page=8|}">8</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{|?catalog=${catalog}&page=9|}">9</a></li>
+            <li class="page-item">
+                <a  class="page-link" th:href="@{|?catalog=${catalog}&page=${page+1}|}">Next</a>
+            </li>
+        </ul>
+    </nav>
+
+</div>
+<script>
+function searchByTitle(page) {
+    fetch("search")
+
+}
+</script>
+</html>

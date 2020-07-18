@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.login-bg {
+    width: 100%;
+    height: 900px;
+    overflow: hidden;
+    /* padding-top:150px;  */
+    background: url(../images/bg.jpg) no-repeat center;
+    background-size: cover;
+}
+.box {
+    width: 100%;
+    height: 900px;
+    overflow: hidden;
+    /* 透明度渐变 */
+    background: linear-gradient(to right, rgba(6, 203, 230, 0), rgba(128, 241, 245, 0));
+}
+.card {
+    width: 500px;
+    border-radius: 20px;
+    background-color: rgb(0, 0, 0);
+    margin-top: 150px;
+    margin-left: 200px;
+    box-shadow: 0px 20px 70px 20px rgba(69, 70, 68, 0.3);
+
+}
+.header {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    /* padding-top:30px;  */
+    border-radius: 15px 15px 0 0;
+    margin-bottom: 50px;
+    background-image: linear-gradient(
+            135deg,
+            rgb(71, 56, 73) 0%,
+            rgb(24, 9, 26) 100%
+    );
+}
+.former .inner{
+    padding: 30px 50px;
+    position: relative;
+}
+.header-portrait {
+    margin: 40px auto;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid rgb(139, 202, 21);
+    background: url(../images/head.jpg) no-repeat center;
+    background-size: cover;
+}
+input,button {
+    width: 400px;
+    height: 40px;
+    font-size: 20px;
+    color: gray;
+    box-sizing: border-box;
+    border-radius: 20px;
+    border: 1px solid rgb(109, 107, 107);
+}
+input{
+    padding-left: 40px;
+}
+button {
+    font-size: 20px;
+    color: white;
+    background-color: crimson;
+}
+label {
+    font-size: 20px;
+    color: gray;
+}
+.icon {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    background: url(../images/zhanghao.png) no-repeat center;
+    background-size: contain;
+    top: 35px;
+    left: 60px;
+}
+.icon-password{
+    background-image:url(../images/mima.png);
+}

@@ -1,0 +1,66 @@
+.form-balance div{
+    position: relative;
+}
+.form-balance .icon{
+    position: absolute;
+    top: 26px;
+    left: 40px;
+    width: 40px;
+    height: 40px;
+    background-color: aqua;
+    display: block;
+} 
+.form-balance .icon-cash{
+    background:url(../images/balance/icon_jndz5xi4ya8/CASH.png) no-repeat center;
+    background-size: cover;
+}
+.form-balance .icon-income{
+    width: 45px;
+    height: 45px;
+    background:url(../images/balance/icon_jndz5xi4ya8/shouru.png) no-repeat center;
+    background-size: cover;
+}
+.form-balance .icon-rent{
+    background:url(../images/balance/icon_jndz5xi4ya8/fangzu.png) no-repeat center;
+    background-size: cover;
+}
+.form-balance .icon-charges{
+    background:url(../images/balance/icon_jndz5xi4ya8/shuidian.png) no-repeat center;
+    background-size: cover;
+}
+.form-balance .icon-eat{
+    background:url(../images/chifan.png) no-repeat center;
+    background-size: cover;
+}
+.form-balance .icon-treat{
+    background:url(../images/balance/icon_jndz5xi4ya8/yaoqingkehu.png) no-repeat center;
+    background-size: cover;
+}
+.form-balance .icon-ktv{
+    background:url(../images/balance/icon_jndz5xi4ya8/ktv.png) no-repeat center;
+    background-size: cover;
+}
+.form-balance input{
+    width: 450px;
+    height: 50px;
+    margin-top: 20px;
+    margin-left: 90px;
+    padding-left: 20px;
+   line-height: 25px;
+    border-style: none;
+    border-bottom: 2px solid rgb(10, 137, 241);
+    box-sizing: border-box;
+    background-color: transparent;
+    font-size: 15px;
+}
+.form-balance button{
+    position: absolute;
+    top: 278px;
+    left: 826px;
+    width: 60px;
+    height: 60px;
+    border: 2px solid rgb(45, 140, 218);
+    border-radius: 50%;
+    background: url(../images/balance/icon_jndz5xi4ya8/jiantou.png) no-repeat center;
+    background-size: contain;
+}

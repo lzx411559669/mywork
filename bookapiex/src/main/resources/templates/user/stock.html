@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="management">
+<div th:fragment="content" >
+    <div >
+        <h2>STOCK</h2>
+        <div id="accordion" >
+            <div class="card" th:each="item,userStat:${usermap}" style="margin-top: 10px">
+                <div class="card-header">
+                    <a class="card-link" data-toggle="collapse" href="#collapseOne" th:text="|用户：${userStat.current.key}|">
+                    </a>
+                </div>
+                <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                    <div class="card-body">
+                        <h5 style="text-align: center">借阅记录</h5>
+                        <ul th:each="book:${userStat.current.value}">
+                            <div class="card bg-light text-dark">
+                                <div class="card-body">
+                                    <li th:text="|书名：${book.getName()}|"></li>
+                                    <li th:text="|借阅时间：${book.getBorrowList()[0].getBorrowDate()}|"></li>
+                                    <li th:text="|归还时间：${book.getBorrowList()[0].getReturnDate()}|"></li>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>

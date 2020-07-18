@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.ForcorrectDao">
+       <resultMap type="com.entity.Forcorrect" id="forcorrectResult">
+              <result property="fcno" column="fcno"/>
+              <result property="xztmark" column="xztmark"/>
+              <result property="zgtno1" column="zgtno1"/>
+              <result property="zgtda1" column="zgtda1"/>
+              <result property="zgtno2" column="zgtno2"/>
+              <result property="zgtda2" column="zgtda2"/>
+              <result property="condition" column="condition"/>
+              <result property="testsno" column="testsno"/>
+              <association property="sj" javaType="com.entity.Subject">
+	              <result property="suid" column="suid"/>
+                  <result property="suname" column="suname"/>
+              </association>
+              <association property="stu" javaType="com.entity.Student">
+	              <result property="sid" column="sid"/>
+	              <result property="spwd" column="spwd"/>
+	              <result property="sname" column="sname"/>
+	              <result property="sgender" column="sgender"/>
+              </association>
+       </resultMap>
+	
+		<select id="show" resultMap="forcorrectResult" parameterType="map">
+              <![CDATA[
+                       select a.* from(select f.*,sj.suname,s.sname,rownum r 
+                       from student s,forcorrect f,subject sj where s.sid=f.sid and sj.suid=f.suid
+                       ) a
+                       where r> (#{index}-1)*#{size} and r< #{index}*#{size}
+              ]]>
+          </select>
+          <select id="count" resultType="java.lang.Integer">
+              SELECT COUNT(1) FROM forcorrect
+          </select>
+          <insert id="add" parameterType="com.entity.Forcorrect">
+          	insert into forcorrect(fcno,xztmark,zgtno1,zgtda1,zgtno2,zgtda2,testsno,suid,SID) values(forcorrect_tests.nextval,#{xztmark},#{zgtno1},#{zgtda1},#{zgtno2},#{zgtda2},#{testsno},#{sj.suid},#{stu.sid})
+          </insert>
+          <select id="findByfcno" resultMap="forcorrectResult" parameterType="int">
+          		select * 
+                from student s,forcorrect f,subject sj 
+                where s.sid=f.sid 
+                and sj.suid=f.suid
+                and fcno=#{0}
+          </select>
+          <update id="update" parameterType="com.entity.Forcorrect">
+          	UPDATE forcorrect SET condition=2 WHERE fcno=#{fcno}
+          </update>
+          <select id="del" parameterType="int">
+          	delete from forcorrect where fcno=#{0}
+          </select>
+          <select id="IsTest" resultMap="forcorrectResult" parameterType="com.entity.Forcorrect">
+          	select * from forcorrect where testsno=#{testsno} and sid=#{stu.sid}
+          </select>
+
+</mapper>

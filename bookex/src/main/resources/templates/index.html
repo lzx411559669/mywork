@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>图书管理系统</title>
+    <style>
+        .header {
+            width: 100%;
+            background: gray;
+        }
+        a{
+            color: white;
+        }
+        a:hover{
+            color: darkturquoise;
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#home">主页</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link add" data-toggle="tab" href="#menu1">添加图书</a>
+            </li>
+        </ul>
+    </div>
+</header>
+<main>
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div id="home" class="container tab-pane active"><br>
+            <div style="margin-top: 20px;width:600px;" >
+                <form action="/book/search" class="form-inline">
+                    <div>
+                        <input type="text" class="form-control" name="bookName" placeholder="输入要搜索的书名...">
+                    </div>
+                    <button style="margin-left: 30px" type="submit" class="btn btn-outline-primary">点击搜索</button>
+                </form>
+            </div>
+            <div th:include="::content">页面正文内容</div>
+        </div>
+        <div id="menu1" class="container tab-pane add"><br>
+            <h3 style="text-align: center">添加书籍</h3>
+            <form action="/book/save" method="post" style="width: 500px;margin: auto">
+                <div>
+                    <label>图书id:</label>
+                    <input type="number" class="form-control" name="id" placeholder="输入书id...">
+                </div>
+                <div>
+                    <label>图书名称:</label>
+                    <input type="text" class="form-control" name="name" placeholder="输入书名...">
+                </div>
+                <div>
+                    <label>图书作者:</label>
+                    <input type="text" class="form-control" name="author" placeholder="输入作者...">
+                </div>
+                <div>
+                    <label>图书分类:</label>
+                    <input type="text" class="form-control" name="type" placeholder="输入图书类别...">
+                </div>
+                <div>
+                    <label>图书编号:</label>
+                    <input type="number" name="isbn" class="form-control"  placeholder="输入编号...">
+                </div>
+                <div>
+                    <label>图书价格:</label>
+                    <input type="number" name="price" class="form-control"  placeholder="输入价格...">
+                </div>
+                <div>
+                    <label>图书url:</label>
+                    <input type="text" class="form-control" name="imgurl" placeholder="输入书url...">
+                </div>
+
+                <div>
+                    <label>出版日期:</label>
+                    <input type="date" class="form-control" name="publishDate" placeholder="输入出版日期...">
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-outline-primary" style="width: 500px;margin-top: 20px">点击添加</button>
+                </div>
+            </form>
+        </div>
+        <div id="menu2" class="container tab-pane  search"><br>
+        </div>
+    </div>
+</main>
+</body>
+</html>

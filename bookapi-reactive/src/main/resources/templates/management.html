@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        .info {
+            position: absolute;
+            top: 8px;
+            right: 350px;
+            color: white;
+        }
+        .person {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: url("/images/parallel.png") no-repeat center;
+            background-size: cover;
+        }
+        .usernav {
+            margin-left: 7%;
+        }
+        .narbar{
+            position: relative;
+        }
+        .nav-item {
+            font-size: 14px;
+            margin-left: 30px;
+        }
+        .popover {
+            max-width: 500px;
+        }
+    </style>
+</head>
+<body style="background:#fafafa;">
+<nav class="navbar navbar-expand-lg fixed-top navbar-light shadow-sm mb-5 bg-white rounded" style="background: white">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">简易图书系统后台</a>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="usernav navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="/bookmanagement">图书管理<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/userlist">用户管理</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/addbook">添加图书</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login.html">退出</a>
+            </li>
+            <li class="nav-item">
+                <!-- Button trigger modal -->
+                <div class="info" data-toggle="tooltip" title="个人信息">
+                    <a href="/userinfo?role=management">
+                        <button type="button" href="" class="btn person">
+                        </button>
+                    </a>
+                </div>
+
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" action="/search">
+            <input type="text" hidden name="role" value="management">
+            <input class="form-control mr-sm-2" id="word"  type="search" placeholder="Search" aria-label="Search" name="title">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <div id="content">
+            </div>
+        </form>
+
+    </div>
+</nav>
+<main>
+    <div th:include="::content">页面正文内容</div>
+</main>
+<nav class="fixed-bottom navbar-light shadow p-3 bg-white rounded" style="text-align: center">
+    <span style="color:lightgray ;font-size: 14px;">
+    简易图书系统Copyright©2020
+    </span>
+</nav>
+</body>
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    });
+    // 借书
+    function deletebook(bookid) {
+        var r = confirm("确定删除这本书？");
+        if (!r) {
+            return;
+        }
+        fetch("/delete?bookid=" + bookid).then(res => res.json())
+            .then(res => {
+                if (res) {
+                    alert("删除成功");
+                    window.location.href="/bookmanagement";
+                }
+            })
+    }
+    //删除用户
+    function deleteuser(userid) {
+        var r = confirm("确定删除此用户？");
+        if (!r) {
+            return;
+        }
+        fetch("/deleteuser?userid=" + userid).then(res => res.json())
+            .then(res => {
+                if (res) {
+                    alert("删除成功");
+                    window.location.href = "/userlist"
+                }
+            })
+    }
+    //关键词搜索
+
+
+</script>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="index">
+<div th:fragment="content">
+    <h3 style="text-align: center">图书列表</h3>
+    <div class="container" style="margin-top: 30px">
+
+      <!--  <table  class="table  table-hover table-striped">
+            <thead>
+            <tr>
+                <th>
+                    图书封面
+                </th>
+                <th>
+                    图书名称
+                </th>
+                <th>
+                    图书作者
+                </th>
+
+                <th>
+                    图书编号
+                </th>
+                <th>
+                    图书价格
+                </th>
+                <th>分类</th>
+                <th>出版时间</th>
+                <th>id</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="book:${pages}" >
+                <td>
+                    <img style="width: 100px;" th:src="@{{path}(path=${book.getImgurl()})}" alt="">
+                </td>
+                <td th:text="${book.name}"></td>
+                <td th:text="${book.author}"></td>
+                <td th:text="${book.isbn}"></td>
+                <td th:text="${book.price}"></td>
+                <td th:text="${book.type}"></td>
+                <td th:text="${book.publishDate}"></td>
+                <td th:text="${book.id}"></td>
+                <td><a href="javascript:;" th:onclick="|javascript:delBook(${book.id})|"><button type="button" class="btn btn-outline-primary">删除</button></a></td>
+            </tr>
+            </tbody>
+        </table>-->
+        <div class="card" style="width:200px;height: 400px; margin: 10px 10px;text-align: center" th:each="book:${pages} ">
+            <div style="margin: 0 auto">
+            <img class="card-img-top" th:src="@{{path}(path=${book.getImgurl()})}" alt="Card image" style="width:110px ;height: 150px;">
+            </div>
+            <div class="card-body">
+                <h4 class="card-title" th:text="|${book.name}|"></h4>
+                <p class="card-text" th:text="|￥：${book.price}|"></p>
+                <p class="card-text" th:text="|作者：${book.author}|"></p>
+                <p class="card-text" th:text="|出版日期：${book.publishDate}|"></p>
+                <a href="javascript:;" th:onclick="|javascript:delBook(${book.id})|"><button type="button" class="btn btn-outline-primary">删除</button></a>
+            </div>
+        </div>
+    </div>
+    <div class="page-btn">
+        <a th:href="@{|?page=${pages.number-1}|}"><button type="button" class="btn btn-outline-primary">上一页</button></a>
+        <a th:href="@{|?page=${pages.number+1}|}"><button type="button" class="btn btn-outline-primary">下一页</button></a>
+    </div>
+</div>
+<script>
+    function delBook(id) {
+        var r = confirm("确定删除本书么？");
+        if (!r) {
+            return;
+        }
+        fetch("/book/del?id=" + id).then(res => res.json()
+    ).
+        then(res => {
+            if(res) {
+                console.log(res);
+                alert("删除成功");
+                // 刷新页面
+                window.location.href = "/book/list.html";
+            }
+        }
+    )
+    }
+</script>
+</html>

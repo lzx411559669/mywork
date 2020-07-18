@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户信息</title>
+</head>
+<body>
+<a href="/user/add.html">新增用户</a>
+<br>
+<ul th:each="user,it:${userlist}">
+    <li>
+        <div>
+            <span>[[${it.count}]]</span>
+            <p>[[|用户名：${user.name}|]]</p>
+            <p>[[|手机号：${user.mobile}|]]</p>
+        </div>
+    </li>
+</ul>
+</body>
+</html>

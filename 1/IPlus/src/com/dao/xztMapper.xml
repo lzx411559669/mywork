@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.XztDao">
+       <resultMap type="com.entity.Xzt" id="xztResult">
+              <result property="xztno" column="xztno"/>
+              <result property="xztnr" column="xztnr"/>
+              <result property="val" column="val"/>
+              <result property="a" column="a"/>
+              <result property="b" column="b"/>
+              <result property="c" column="c"/>
+              <result property="d" column="d"/>
+              <result property="answer" column="answer"/>
+              <association property="sj" javaType="com.entity.Subject">
+	              <result property="suid" column="suid"/>
+                  <result property="suname" column="suname"/>
+              </association>
+       </resultMap>
+		<select id="showxzt" resultMap="xztResult" parameterType="map">
+              <![CDATA[
+              select a.* from(select x.*,s.suname,rownum r from xzt x,subject s where x.suid=s.suid) a
+ 				where r> (#{index}-1)*#{size} and r< #{index}*#{size}
+              ]]>
+          </select>
+		 <select id="count" resultType="java.lang.Integer">
+              SELECT COUNT(1) FROM xzt
+          </select>
+          <select id="delXzt" parameterType="int">
+          		delete from xzt where xztno=#{0}
+          </select>
+          <insert id="addXzt" parameterType="java.lang.Integer">
+          		insert into xzt values(seq_xzt.nextval,#{xztnr},#{val},#{a},#{b},#{c},#{d},#{answer},#{sj.suid})
+          </insert>
+          <select id="findByXztno" resultMap="xztResult" parameterType="int">
+          		select * from xzt where xztno=#{0}
+          </select>
+          <update id="updateXzt" parameterType="java.lang.Integer">
+          		update xzt set xztnr=#{xztnr},val=#{val},a=#{a},b=#{b},c=#{c},d=#{d},answer=#{answer},suid=#{sj.suid} where xztno=#{xztno}
+          </update>
+          <select id="findXzt" resultMap="xztResult" parameterType="String" >
+          		select * from xzt where xztnr like '%'||#{0}||'%' 
+          </select>
+          <select id="start" resultMap="xztResult" parameterType="int">
+          		select * from xzt where suid=#{0}
+          </select>
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.TestsDao">
+       <resultMap type="com.entity.Tests" id="testsResult">
+              <result property="testsno" column="testsno"/>
+              <result property="condition" column="condition"/>
+              <association property="cl" javaType="com.entity.Banji">
+	              <result property="cid" column="cid"/>
+	              <result property="num" column="num"/>
+              </association>
+              <association property="sj" javaType="com.entity.Subject">
+	              <result property="suid" column="suid"/>
+                  <result property="suname" column="suname"/>
+              </association>
+       </resultMap>
+       
+       <select id="show" resultMap="testsResult" parameterType="map">
+       		 <![CDATA[
+       		 select a.* from  (select t.*,c.num,sj.suname,rownum r from tests t,class c,subject sj where t.cid=c.cid and t.suid=sj.suid )  a
+                       where r> (#{index}-1)*#{size} and r< #{index}*#{size}
+             ]]>
+       </select>
+       <select id="count" resultType="java.lang.Integer">
+              SELECT COUNT(1) FROM tests
+          </select>
+          <insert id="addTests" parameterType="com.entity.Tests">
+          		insert into tests(testsno,cid,suid) values (seq_tests.nextval,#{cl.cid},#{sj.suid})
+          </insert>
+          <select id="testList" resultMap="testsResult" parameterType="int">
+          		select * from tests t,subject s where t.suid=s.suid and cid=#{0}
+          </select>
+          <select id="findt" resultMap="testsResult" parameterType="int">
+          		select * from tests where testsno=#{0}
+          </select>
+          <update id="update" parameterType="com.entity.Tests">
+          		 UPDATE tests SET condition=2 WHERE testsno=#{testsno}
+          </update>
+</mapper>

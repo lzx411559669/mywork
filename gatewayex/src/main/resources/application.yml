@@ -1,0 +1,27 @@
+server:
+  port: 8090
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+spring:
+  application:
+    name: gatewayex
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: bookex
+          uri: lb://bookex
+          predicates:
+            - Path=/book/**
+          filters:
+            - RewritePath=/book/(?<path>.*), /$\{path}
+        - id: userex
+          uri: lb://userex
+          predicates:
+            - Path=/user/**
+          filters:
+            - RewritePath=/user/(?<path>.*), /$\{path}

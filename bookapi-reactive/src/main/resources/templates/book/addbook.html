@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="management">
+<div th:fragment="content">
+    <div class="card text-center" style="margin: 100px auto;width: 40%">
+        <div class="card-header">
+            <ul class="nav nav-pills" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="pill" href="#home">添加图书</a>
+                </li>
+               <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill" href="#menu1">批量添加</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <div class="tab-content">
+                <div id="home" class="container tab-pane active"><br>
+                    <form action="/addBook" method="post">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">书名</span>
+                            </div>
+                            <input type="text" class="form-control" name="title" aria-describedby="basic-addon1">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon4">分类</span>
+                            </div>
+                            <input type="text" class="form-control" name="catalog" aria-describedby="basic-addon4">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon5">标签</span>
+                            </div>
+                            <input type="text" class="form-control" name="tags" aria-describedby="basic-addon5">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon8">简述</span>
+                            </div>
+                            <input type="text" class="form-control"   name="sub1" aria-describedby="basic-addon8">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon6">出版时间</span>
+                            </div>
+                            <input type="text" class="form-control"   name="bytime"  aria-describedby="basic-addon6">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon2">封面地址</span>
+                            </div>
+                            <input type="text" class="form-control" name="img" aria-describedby="basic-addon2">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon3">书籍简介</span>
+                            </div>
+                            <textarea type="text" rows="5" class="form-control" name="sub2" aria-describedby="basic-addon3"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-secondary">关闭</button>
+                            <button type="submit" class="btn btn-primary">提交</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="menu1" class="container tab-pane fade"><br>
+                    <form action="/json">
+                        <div class="form-group">
+                            <textarea class="form-control" id="Textarea1" name="jsontext" rows="10" placeholder="输入JSON信息以解析"></textarea>
+                        </div>
+                        <button type="submit" style="width: 100%" class="btn btn-primary">提交</button>
+                    </form>
+                    <br>
+                    <form action="/upload" enctype="multipart/form-data" charset="utf-8" method="post">
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" name="file" class="custom-file-input" id="inputGroupFile04"
+                                       aria-describedby="inputGroupFileAddon04">
+                                <label class="custom-file-label" for="inputGroupFile04">选择JSON文件</label>
+                            </div>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04">
+                                    上传JSON文件
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

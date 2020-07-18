@@ -1,0 +1,16 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port:2222
+spring:
+  application:
+    name: userex
+  data:
+    mongodb:
+      host: 116.85.20.165
+      port: 27017
+      database: practive
+      username: lzx
+      password: lzx0203.

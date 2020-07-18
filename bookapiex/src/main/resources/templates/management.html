@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>简易图书系统</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        .bar{
+            border:1px solid gainsboro;
+            height: 60px;
+            padding-top: 8px;
+            padding-left: 20%;
+            background-color: #ECF0F1;
+        }
+        body{
+            background-color: #1ABC9c;
+        }
+        .container{
+            width: 1920px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .page-btn{
+            display: flex;
+            justify-content: space-between;
+        }
+        li{
+            list-style: none;
+        }
+        .borrowed{
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            text-align: center;
+            line-height: 40px;
+            border: 1px solid red;
+            color: red;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+<div class="bar">
+    <ul class="nav nav-pills" role="tablist" >
+        <li class="nav-item">
+            <a class="nav-link "  href="/getbooks" >书库</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " data-toggle="pill" href="#menu2">添加图书</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link "  href="/getuser" >读者借阅情况</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link "  href="/info">信息统计</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link "  href="/getalluserinfo">用户信息</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link "   href="/login.html">退出</a>
+        </li>
+    </ul>
+</div>
+<div class="container">
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div  class="container tab-pane active"><br>
+            <div th:include="::content">页面正文内容</div>
+        </div>
+        <div id="menu2" class="container tab-pane fade"><br>
+            <h3>添加图书</h3>
+            <form action="/addbook" method="post">
+                <div class="form-group">
+                    <input type="number" class="form-control" name="bookid" placeholder="图书id">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="name" placeholder="图书名">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="author" placeholder="作者">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="price" placeholder="价格">
+                </div>
+                <div class="form-group">
+                    <input type="date" class="form-control" name="publishDate" placeholder="出版时间">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="press" placeholder="出版社">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="type" placeholder="类别">
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" name="stockid" placeholder="仓库id">
+                </div>
+                <button type="submit" style="width: 100%" class="btn btn-primary">添加</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

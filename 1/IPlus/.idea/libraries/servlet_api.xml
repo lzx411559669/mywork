@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="servlet-api">
+    <CLASSES>
+      <root url="jar://D:/软件/tomcat/lib/servlet-api.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/org.springframework.beans-3.2.2.RELEASE.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/spring-context-5.1.7.RELEASE.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/org.springframework.web-3.2.2.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Desktop/spring-2.5.6.SEC03-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

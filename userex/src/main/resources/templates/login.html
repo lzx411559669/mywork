@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        a{
+            color: white;
+        }
+        .card{
+            width: 500px;
+            margin: 200px auto;
+            text-align: center;
+        }
+        .inner{
+            margin: 40px 0px;
+        }
+        button{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <div class="card-body">
+        <form action="/user/login" method="post">
+            <h3>登录</h3>
+            <div class="inner">
+                <!-- <label for="username">账号：</label> -->
+                <input id="username" class="form-control" type="text" name="username" placeholder="请输入账号">
+            </div>
+            <div class="inner">
+                <!-- <label for="password">密码：</label> -->
+                <input id="password" class="form-control" type="password" name="password" placeholder="请输入密码">
+            </div>
+            <div class="inner">
+                <button class="btn btn-primary" type="submit">登录</button>
+            </div>
+            <div class="inner">
+                <a href="/user/add.html"><button class="btn btn-primary" type="button">注册</button></a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加学生</title>
+</head>
+<body>
+<form action="/add" method="post" >
+    <label for="">学号：</label>
+    <input type="text" name="id">
+    <label for="">姓名：</label>
+    <input type="text" name="name">
+    <label for="">科目id：</label>
+    <input type="text" name="student.subjectList[0].id">
+    <label for="">科目名：</label>
+    <input type="text" name="student.subjectList[0].name">
+    <label for="">分数：</label>
+    <input type="text" name="student.subjectList[0].score">
+
+    <button type="submit">添加</button>
+</form>
+</body>
+</html>

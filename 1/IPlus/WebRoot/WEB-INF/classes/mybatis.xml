@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "mybatis-3-config.dtd" >
+<configuration>
+    <mappers>
+         <mapper resource="com/dao/teacherMapper.xml"></mapper>
+         <mapper resource="com/dao/studentMapper.xml"></mapper>
+         <mapper resource="com/dao/classMapper.xml"></mapper>
+         <mapper resource="com/dao/subjectMapper.xml"></mapper>
+         <mapper resource="com/dao/adminMapper.xml"></mapper>
+         <mapper resource="com/dao/xztMapper.xml"></mapper>
+         <mapper resource="com/dao/zgtMapper.xml"></mapper>
+         <mapper resource="com/dao/testsMapper.xml"></mapper>
+         <mapper resource="com/dao/forcorrectMapper.xml"></mapper>
+         <mapper resource="com/dao/correctedMapper.xml"></mapper>
+    </mappers>
+</configuration>

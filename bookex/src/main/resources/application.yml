@@ -1,0 +1,16 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 3333
+spring:
+  application:
+    name: bookex
+  data:
+    mongodb:
+      host: 116.85.20.165
+      port: 27017
+      username: lzx
+      password: lzx0203.
+      database: practive

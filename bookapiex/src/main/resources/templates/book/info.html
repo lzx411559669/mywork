@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="management">
+<div th:fragment="content">
+    <ul th:each="item,infoStat:${infoMap}">
+        <li class="list-group-item list-group-item-info" th:text="|${infoStat.current.key}:${infoStat.current.value}|"></li>
+    </ul>
+</div>
+</html>

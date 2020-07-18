@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout">
+<div th:fragment="content">
+    <h2>图书列表</h2>
+    <div>
+        <a href="/book/add.html">添加图书</a>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>
+                图书名称
+            </th>
+            <th>
+                图书作者
+            </th>
+            <th>
+                图书描述
+            </th>
+            <th>
+                图书编号
+            </th>
+            <th>
+                图书价格
+            </th>
+            <th>图书封面</th>
+            <th>id</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.name}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.desc}"></td>
+            <td th:text="${book.isbn}"></td>
+            <td th:text="${book.price}"></td>
+            <td th:text="${book.pictureUrl}"></td>
+            <td th:text="${book.id}"></td>
+            <td><a href="javascript:;" th:onclick="delBook([[${book.id}]])">删除</a></td>
+        </tr>
+        </tbody>
+
+    </table>
+
+
+    <script>
+        function delBook(id){
+
+            var r = confirm("确定删除本书么？");
+            if(!r){
+                return;
+            }
+
+            fetch("/book/del?id="+id).then(res=>res.json()).then(res=>{
+                if(res){
+                    console.log(res);
+                    alert("删除成功");
+                    // 刷新页面
+                    window.location.href = "/book/list.html";
+                }
+            })
+        }
+    </script>
+</div>
+
+</html>

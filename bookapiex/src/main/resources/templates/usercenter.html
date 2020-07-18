@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>简易图书系统</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+
+        .bar{
+            border:1px solid gainsboro;
+            height: 60px;
+            padding-top: 8px;
+            padding-left: 20%;
+            background-color: #ECF0F1;
+        }
+        body{
+            background-color: #1ABC9c;
+        }
+        li{
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nav pills -->
+    <div class="bar">
+    <ul class="nav nav-pills" role="tablist" >
+        <li class="nav-item">
+            <a class="nav-link "  href="/getmybook" >我的借阅</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link "  href="/canborrow" >借书</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " data-toggle="pill" href="#menu2">查看新书</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " data-toggle="pill" href="#menu3">搜索</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link "   href="/getuserinfo">个人信息</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link "   href="/login.html">退出</a>
+        </li>
+    </ul>
+    </div>
+    <div class="container">
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div  class="container tab-pane active"><br>
+            <div th:include="::content">页面正文内容</div>
+        </div>
+        <div id="menu2" class="container tab-pane fade"><br>
+            <h3>查看新书</h3>
+            <form action="/newbooks" method="post">
+
+                <div class="form-group">
+                    <label >输入查看范围：</label>
+                    <input type="number" class="form-control" name="days" placeholder="XX天以内的新书">
+                </div>
+                <button type="submit" style="width: 100%" class="btn btn-primary">查看</button>
+            </form>
+        </div>
+
+        <div id="menu3" class="container tab-pane fade"><br>
+            <h3>搜索</h3>
+            <form action="/getbyname" method="post">
+
+                <div class="form-group">
+
+                    <input type="text" class="form-control" name="bookname" placeholder="输入查找内容">
+                </div>
+                <button type="submit" style="width: 100%" class="btn btn-primary">搜索</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

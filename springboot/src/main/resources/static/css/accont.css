@@ -1,0 +1,20 @@
+.form-account div{
+    margin: 0 auto;
+    text-align: center;
+}
+.form-account input,.form-account select ,.form-account button{
+     width: 400px;
+     height: 40px;
+     border-radius: 20px;
+     margin-top: 50px;
+     padding-left: 20px;
+     box-sizing: border-box;
+     border: 2px solid rgb(35, 163, 223);
+     background-color: transparent;
+}
+.form-account button{
+    padding-left: 0px;
+    background-color:  crimson;
+    color: aliceblue;
+    border: none;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        .card{
+            width: 600px;
+            margin: 200px auto;
+            text-align: center;
+            padding: 0 20px;
+        }
+        input{
+            margin: 5px 0px;
+        }
+        button{
+            width: 100%;
+        }
+        body{
+            background: url("/images/bg1.jpg");
+            /*background-color: #208FF9;*/
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+<div class="card-body">
+    <h3>注册用户</h3>
+<form action="/register" method="post">
+    <input type="text" class="form-control" name="userNumber" placeholder="请输入一卡通号">
+    <br>
+    <input type="text" class="form-control" name="name" placeholder="请输入昵称">
+    <br>
+    <input type="text" class="form-control" name="password" placeholder="密码">
+    <br>
+    <input type="text"  class="form-control" hidden name="role" value="普通用户">
+    <input type="text" class="form-control" name="phone" placeholder="电话">
+    <br>
+    <input type="text" class="form-control" name="department" placeholder="院系">
+    <br>
+    <input type="text" class="form-control" name="email" placeholder="邮箱">
+    <br>
+    <button type="submit" class="btn btn-primary">提交</button>
+</form>
+</div>
+</div>
+</body>
+</html>

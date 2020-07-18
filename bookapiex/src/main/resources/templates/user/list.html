@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="usercenter">
+<div th:fragment="content">
+<table class="table table-hover">
+    <h3>我借阅的图书</h3>
+    <thead>
+    <tr>
+        <th>书名</th>
+        <th>作者</th>
+        <th>分类</th>
+        <th>借阅时间</th>
+        <th>归还时间</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book:${mybooks}">
+        <td th:text="${book.name}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.type}"></td>
+        <td th:text="${book.borrowList[0].borrowDate}"></td>
+        <td th:text="${book.borrowList[0].returnDate}"></td>
+        <td><a href="javascript:;" th:onclick="|javascript:returnBook(${book.id})|"><button class="btn btn-outline-primary">还书</button></a></td>
+    </tr>
+
+    </tbody>
+</table>
+    <script>
+        function returnBook(id) {
+            var r = confirm("确定归还这本书么？");
+            if (!r) {
+                return;
+            }
+            fetch("/returnbook?id=" + id).then(res => res.json()
+            ).
+            then(res => {
+                    if(res) {
+                        console.log(res);
+                        alert("归还成功");
+                        // 刷新页面
+                        window.location.href = "/getmybook";
+                    }
+                }
+            )
+        }
+    </script>
+</div>
+
+</html>

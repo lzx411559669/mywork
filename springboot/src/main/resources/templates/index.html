@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>WAICAI</title>
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/balance.css" />
+    <link rel="stylesheet" href="/css/pay.css" />
+    <link rel="stylesheet" href="/css/accont.css" />
+    <link rel="stylesheet" href="/css/filter.css" />
+    <!-- <script src="js/index.js"></script> -->
+  </head>
+  <body>
+    <div class="box-bg">
+      <!-- 左侧导航 -->
+      <div class="left-nav" id="left-nav">
+        <div class="head clearFix">
+          <div class="head-icon"></div>
+          <div class="head-word">
+            挖财
+          </div>
+        </div>
+        <ul class="nav-list" id="nav-list">
+          <li class="current-li"><span class="ul-icon "></span> 理财服务</li>
+          <li><span class="ul-icon balance"></span> 余额计算</li>
+          <li><span class="ul-icon pay"></span> 支付方式</li>
+          <li><span class="ul-icon bill"></span> 记账</li>
+          <li><span class="ul-icon choice-bill"></span>筛选账单</li>
+        </ul>
+      </div>
+      <!-- 右侧主体 -->
+      <div class="main">
+        <div class="title-span"><p class="title">理财服务</p></div>
+        <ul id="main-list">
+          <li class="show">
+            <form class="form-finance" action="/finance" method="post">
+              <div>
+                <input type="text" name="amount" placeholder="理财金额" />
+              </div>
+              <div>
+                <select name="type" id="">
+                  <option value="yuebao">余额宝</option>
+                  <option value="jd">京东小金库</option>
+                </select>
+              </div>
+              <div>
+                <input type="text" name="days" placeholder="理财天数" />
+              </div>
+              <div>
+                <button type="submit">理财</button>
+              </div>
+            </form>
+          </li>
+          <li>
+            <form action="/accounting" method="get" class="form-balance">
+              <div>
+                <span class="icon icon-cash"></span>
+                <input type="text" name="cash" placeholder="现金" />
+              </div>
+              <div>
+                <span class="icon icon-income"></span>
+                <input type="text" name="income" placeholder="收入" />
+              </div>
+              <div>
+                <span class="icon icon-rent"></span>
+                <input type="text" name="rent" placeholder="房租" />
+              </div>
+              <div>
+                <span class="icon icon-charges"></span>
+                <input type="text" name="charges" placeholder="水电" />
+              </div>
+              <div>
+                <span class="icon icon-eat"></span>
+                <input type="text" name="eat" placeholder="吃饭" />
+              </div>
+              <div>
+                <span class="icon icon-treat"></span>
+                <input type="text" name="treat" placeholder="请客" />
+              </div>
+              <div>
+                <span class="icon icon-ktv"></span>
+                <input type="text" name="ktv" placeholder="ktv" />
+              </div>
+              <button type="submit"></button>
+            </form>
+          </li>
+          <li>
+            <form action="/pay" method="post" class="form-pay">
+              <div>
+                <input type="text" name="amount" placeholder="支付金额" />
+              </div>
+              <div>
+                <select name="payType" id="">
+                  <option value="huabei">支付宝花呗</option>
+                  <option value="baitiao">京东白条</option>
+                  <option value="creditCard">信用卡</option>
+                </select>
+              </div>
+              <div>
+                <input type="text" name="stagesCount" placeholder="分期数" />
+              </div>
+              <div>
+                <button type="submit">支付</button>
+              </div>
+            </form>
+          </li>
+          <li>
+            <form action="/record" method="post" class="form-account">
+              <div>
+                <input
+                  type="text"
+                  name="createTime"
+                  placeholder="发生日期，如2019-01-10"
+                />
+              </div>
+              <div>
+                <input type="text" name="amount" placeholder="金额" />
+              </div>
+              <div>
+                <select name="type">
+                  <option value="收入">收入</option>
+                  <option value="支出">支出</option>
+                </select>
+              </div>
+              <div>
+                <select name="category">
+                  <option value="房租">房租</option>
+                  <option value="水电">水电</option>
+                  <option value="吃饭">吃饭</option>
+                  <option value="请客吃饭">请客吃饭</option>
+                  <option value="ktv">ktv</option>
+                </select>
+              </div>
+              <div>
+                <button type="submit">记一笔</button>
+              </div>
+            </form>
+          </li>
+          <li>
+            <form action="/search" method="post" class="form-filter">
+              <div>
+                <input type="text" name="amount" placeholder="金额" />
+              </div>
+              <div>
+                <button type="submit">过滤</button>
+              </div>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+  <script src="/js/index.js"></script>
+</html>
+

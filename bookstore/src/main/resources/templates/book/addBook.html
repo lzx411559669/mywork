@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout">
+<div th:fragment="content">
+    <h2>添加书籍</h2>
+    <form action="/book/save" th:object="${book}" method="POST">
+        <div th:classappend="${#fields.hasErrors('name')} ? 'error' : ''">
+            <label>书的名称:</label>
+            <input type="text" th:field="*{name}">
+            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+        </div>
+        <div>
+            <label>书的作者:</label>
+            <input type="text" name="author">
+        </div>
+        <div>
+            <label>书的描述:</label>
+            <textarea name="desc"></textarea>
+        </div>
+        <div th:classappend="${#fields.hasErrors('isbn')} ? 'error' : ''">
+            <label>书的编号:</label>
+            <input type="text" th:field="*{isbn}">
+            <p th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></p>
+        </div>
+        <div>
+            <label>书的价格:</label>
+            <input type="text" name="price">
+        </div>
+        <div>
+            <label>书的封面:</label>
+            <input type="text" name="pictureUrl">
+        </div>
+        <div>
+            <button type="submit">注册</button>
+        </div>
+    </form>
+</div>
+
+</html>

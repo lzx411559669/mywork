@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="usercenter">
+<div th:fragment="content">
+    <table class="table table-hover">
+        <h3>图书库</h3>
+        <thead>
+        <tr>
+            <th>书名</th>
+            <th>作者</th>
+            <th><li class="nav-item dropdown">
+                <a style="padding: 0" class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    分类
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/getbytype?type=编程">编程</a>
+                    <a class="dropdown-item" href="/getbytype?type=文学">文学</a>
+                    <a class="dropdown-item" href="/getbytype?type=小说">小说</a>
+                </div>
+            </li></th>
+            <th>出版社</th>
+            <th>出版时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book:${borrowbooks}">
+            <td th:text="${book.name}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.type}"></td>
+            <td th:text="${book.press}"></td>
+            <td th:text="${book.publishDate}"></td>
+            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+               借书
+            </button>
+
+                <div class="modal fade" id="myModal" >
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <!-- 模态框头部 -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">借书</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <!-- 模态框主体 -->
+                            <div class="modal-body">
+                                <form action="/borrowbook" method="post">
+                                    <div class="form-group">
+                                        <input  class="form-control" hidden th:value="${book.id}" name="bookid" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label >输入归还日期：</label>
+                                        <input type="date" class="form-control" name="returndate" placeholder="输入归还日期">
+                                    </div>
+                                    <button type="submit" style="width: 100%" class="btn btn-primary">借阅</button>
+                                </form>
+                            </div>
+
+                            <!-- 模态框底部 -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="width: 100%">关闭</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+    <script>
+
+    </script>
+</div>
+</html>

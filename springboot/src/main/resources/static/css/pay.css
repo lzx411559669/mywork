@@ -1,0 +1,20 @@
+.form-pay div{
+    margin: 0 auto;
+    text-align: center;
+}
+.form-pay input,.form-pay select ,.form-pay button{
+     width: 400px;
+     height: 40px;
+     border-radius: 20px;
+     margin-top: 50px;
+     padding-left: 20px;
+     box-sizing: border-box;
+     border: 2px solid rgb(35, 163, 223);
+     background-color: transparent;
+}
+.form-pay button{
+    padding-left: 0px;
+    background-color:  crimson;
+    color: aliceblue;
+    border: none;
+}
